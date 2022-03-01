@@ -23,14 +23,14 @@ ticketDB = mysql.connector.connect(
 )
 dbCursor = ticketDB.cursor()
 #create issues until we reach desired number
-while issueCount < 100:
+while issueCount < 1:
     print(" -- next ticket -- ")
 
 #call issue Create api endpoint
     url = "https://bryanrockwood.atlassian.net/rest/api/3/issue"
 
     # make sure this is our api
-    auth = HTTPBasicAuth("bryanprockwood@gmail.com", "8mIIBa1S6WJoNLP1HhxcD7EC")
+    auth = HTTPBasicAuth("bryanprockwood@gmail.com", "*****************")
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json"
@@ -66,7 +66,7 @@ while issueCount < 100:
 
     urlGet = "https://bryanrockwood.atlassian.net/rest/api/3/issue/"+latestTicket+"?fields=priority"
 
-    authGet = HTTPBasicAuth("bryanprockwood@gmail.com", "8mIIBa1S6WJoNLP1HhxcD7EC")
+    authGet = HTTPBasicAuth("bryanprockwood@gmail.com", "**********")
 
     headersGet = {
         "Accept": "application/json"
