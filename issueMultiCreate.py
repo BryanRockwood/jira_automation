@@ -23,7 +23,7 @@ ticketDB = mysql.connector.connect(
 )
 dbCursor = ticketDB.cursor()
 #create issues until we reach desired number
-while issueCount < 1:
+while issueCount < 100:
     print(" -- next ticket -- ")
 
 #call issue Create api endpoint
