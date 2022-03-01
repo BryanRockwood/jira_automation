@@ -14,14 +14,6 @@ issueCount = 0
 sevIssues1Min = 0
 sevIssues3Min = 0
 sevIssues5Min = 0
-#make the chart for later
-#ticketCreated = [sevIssues]
-#timeFrame = ["1 Min"]
-#plt.bar(timeFrame, ticketCreated)
-#plt.title('Tickets Created over Time')
-#plt.xlabel('Time')
-#plt.ylabel('Tickets')
-#time.sleep(300)
 
 ticketDB = mysql.connector.connect(
     host="localhost",
@@ -31,8 +23,8 @@ ticketDB = mysql.connector.connect(
 )
 dbCursor = ticketDB.cursor()
 #create issues until we reach desired number
-while issueCount < 2:
-    print("creating new ticket")
+while issueCount < 100:
+    print(" -- next ticket -- ")
 
 #call issue Create api endpoint
     url = "https://bryanrockwood.atlassian.net/rest/api/3/issue"
@@ -65,7 +57,7 @@ while issueCount < 2:
         headers=headers,
         auth=auth
     )
-#    print(json.dumps(json.loads(response.text), sort_keys=True, indent=4, separators=(",", ": ")))
+
     issueCount += 1
 #save the id from the ticket we just made
     jiraID = json.loads(response.text)
@@ -73,7 +65,6 @@ while issueCount < 2:
 #get info to check priority
 
     urlGet = "https://bryanrockwood.atlassian.net/rest/api/3/issue/"+latestTicket+"?fields=priority"
-# check to see if the variable worked ->    print(urlGet)
 
     authGet = HTTPBasicAuth("bryanprockwood@gmail.com", "8mIIBa1S6WJoNLP1HhxcD7EC")
 
@@ -118,7 +109,7 @@ ticketDB.close()
 
 #get how long it took to run process
 print(time.perf_counter())
-#make the chart for later
+#make the chart for visualization
 ticketCreated = [sevIssues1Min, sevIssues3Min, sevIssues5Min]
 timeFrame = ["1 Min", "3 Min", "5 Min"]
 plt.bar(timeFrame, ticketCreated)
@@ -127,5 +118,5 @@ plt.xlabel('Time')
 plt.ylabel('Tickets')
 
 plt.show()
-#we want bargraph of
 
+#end of script
